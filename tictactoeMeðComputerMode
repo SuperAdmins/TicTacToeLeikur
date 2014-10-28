@@ -10,6 +10,8 @@ public class TicTacToe {
 	
 	private static final char E = 0;
 
+	private static final char M = 0;
+
 	private static char board[][];
 	
 	private char player1Move;
@@ -539,9 +541,10 @@ In read = new In();
 		 In read1 = new In();
 		   answer = read1.readChar();
 		
-	 } while(answer != E);
+	 } while(answer != 'E');
 	
 }
 	
 }
+	
 	
