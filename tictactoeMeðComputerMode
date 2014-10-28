@@ -1,0 +1,547 @@
+package ticTacToe;
+
+import java.util.Random;
+
+import edu.princeton.cs.introcs.In;
+import edu.princeton.cs.introcs.StdIn;
+import edu.princeton.cs.introcs.StdOut;
+
+public class TicTacToe {
+	
+	private static final char E = 0;
+
+	private static char board[][];
+	
+	private char player1Move;
+	
+	private char player2Move;
+	
+	private char cpMove;
+	
+	private static int level;
+	
+	private static boolean won;
+	
+	public TicTacToe(){
+		
+		board = new char[4][4];
+		player1Move = 'x';
+		player2Move = 'o';
+		cpMove = 'o';
+		clearBoard();
+		level = 0;
+		won = false;
+		
+	}
+	
+	public void clearBoard()
+	{
+		for(int i = 1; i < 4; i++)
+		{
+			for(int j = 1; j < 4; j++)
+			{
+				board[i][j] = '-';
+			}
+		}
+	}
+	
+	public void PrintTheBoard()
+	{
+		
+		System.out.println("        "+"_______");
+		
+		for(int i = 1; i < 4; i ++)
+		{
+			System.out.print("        "+"|");
+			
+			for(int j = 1; j < 4; j++)
+			{
+				System.out.print(board[i][j] + "|");
+				
+			}
+			System.out.println();
+		}
+		
+		System.out.println("        "+"_______");
+	}
+	
+	public void placeMarkOnePlayer()
+	{
+In read = new In();
+		
+		
+		
+		if(level % 2 == 1){
+			int x = read.readInt();
+			int y = read.readInt();
+		if(x <= 3 && x >= 1 )
+		{
+			if(y <= 3 && y >= 1)
+			{
+				if(board[x][y] == '-')
+				{
+					board[x][y] = player1Move;
+					
+				}
+				else
+				{
+					System.out.println("choose another spot");
+					placeMarkOnePlayer();
+				}
+			}
+			else
+			{
+				System.out.println("wrong input");
+				placeMarkOnePlayer();
+			}
+		}
+		else
+		{
+			System.out.println("wrong input");
+			placeMarkOnePlayer();
+		}
+	}
+		
+		if(level % 2 == 0)
+		{
+			Random ran = new Random();
+			int x = ran.nextInt(3) + 1;
+			int y = ran.nextInt(3) + 1;
+			
+			
+			if(board[x][y] == '-')
+			{
+				board[x][y] = cpMove;
+				
+			}
+			else
+			{
+				placeMarkOnePlayer();
+			}
+		}
+	}
+	
+	
+	public void placeMarkTwoPlayer()
+	{
+		In read = new In();
+		
+		int x = read.readInt();
+		int y = read.readInt();
+		
+		if(level % 2 == 1){
+		if(x <= 3 && x >= 1 )
+		{
+			if(y <= 3 && y >= 1)
+			{
+				if(board[x][y] == '-')
+				{
+					board[x][y] = player1Move;
+					
+				}
+				else
+				{
+					System.out.println("choose another spot");
+					placeMarkTwoPlayer();
+				}
+			}
+			else
+			{
+				System.out.println("wrong input");
+				placeMarkTwoPlayer();
+			}
+		}
+		else
+		{
+			System.out.println("wrong input");
+			placeMarkTwoPlayer();
+		}
+	}
+		if(level % 2 == 0)
+		{
+			if(x <= 3 && x >= 0 )
+			{
+				if(y <= 3 && y >= 0)
+				{
+					if(board[x][y] == '-')
+					{
+						board[x][y] = player2Move;
+						
+					}
+					else
+					{
+						System.out.println("Spot taken! Choose another spot");
+						placeMarkTwoPlayer();
+					}
+				}
+				else
+				{
+					System.out.println("wrong input");
+					placeMarkTwoPlayer();
+				}
+			}
+			else
+			{
+				System.out.println("wrong input");
+				placeMarkTwoPlayer();
+			}
+		}
+	}
+	
+	public void twoPlayerTurn()
+	{
+		if(level % 2 == 1 && won != true)
+		{
+			System.out.println("player two move");
+		}
+		if(level % 2 == 0 && won != true)
+		{
+			System.out.println("player one move");
+		}
+	}
+	
+	public void onePlayerTurn()
+	{
+		if(level % 2 == 1 && won != true)
+		{
+			System.out.println("player two move");
+		}
+		if(level % 2 == 0 && won != true)
+		{
+			System.out.println("cp move");
+		}
+	}
+	
+	public void chekIfWon()
+	{
+		//check if player is a winner
+		if(board[1][1] == player1Move && board[1][2] == player1Move && board[1][3] == player1Move )
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[2][1] == player1Move && board[2][2] == player1Move && board[2][3] == player1Move )
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[3][1] == player1Move && board[3][2] == player1Move && board[3][3] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][1] == player1Move && board[2][2] == player1Move && board[3][3] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == player1Move && board[2][2] == player1Move && board[3][1] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		
+		if(board[1][1] == player1Move && board[2][1] == player1Move && board[3][1] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+		//	System.exit(0);
+		}
+		if(board[1][2] == player1Move && board[2][2] == player1Move && board[3][2] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == player1Move && board[2][3] == player1Move && board[3][3] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		
+		
+		
+		
+		//check if player two is a winner
+		if(board[1][1] == player2Move && board[1][2] == player2Move && board[1][3] == player2Move )
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[2][1] == player2Move && board[2][2] == player2Move && board[2][3] == player2Move )
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[3][1] == player2Move && board[3][2] == player2Move && board[3][3] == player2Move)
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][1] == player2Move && board[2][2] == player2Move && board[3][3] == player2Move)
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == player2Move && board[2][2] == player2Move && board[3][1] == player2Move)
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == player2Move && board[2][2] == player2Move && board[3][1] == player2Move)
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		
+		if(board[1][1] == player2Move && board[2][1] == player2Move && board[3][1] == player2Move)
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][2] == player2Move && board[2][2] == player2Move && board[3][2] == player2Move)
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == player2Move && board[2][3] == player2Move && board[3][3] == player2Move)
+		{
+			System.out.println("player two wins");
+			won = true;
+			//System.exit(0);
+		}
+	}
+	
+	public void checkIfComputerWon()
+	{
+		//check if player one is a winner
+		if(board[1][1] == player1Move && board[1][2] == player1Move && board[1][3] == player1Move )
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[2][1] == player1Move && board[2][2] == player1Move && board[2][3] == player1Move )
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[3][1] == player1Move && board[3][2] == player1Move && board[3][3] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][1] == player1Move && board[2][2] == player1Move && board[3][3] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == player1Move && board[2][2] == player1Move && board[3][1] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		
+		if(board[1][1] == player1Move && board[2][1] == player1Move && board[3][1] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][2] == player1Move && board[2][2] == player1Move && board[3][2] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == player1Move && board[2][3] == player1Move && board[3][3] == player1Move)
+		{
+			System.out.println("player one wins");
+			won = true;
+			//System.exit(0);
+		}
+		
+		
+		
+        //check if computer is a winner
+		if(board[1][1] == cpMove && board[1][2] == cpMove && board[1][3] == cpMove )
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[2][1] == cpMove && board[2][2] == cpMove && board[2][3] == cpMove )
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[3][1] == cpMove && board[3][2] == cpMove && board[3][3] == cpMove)
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][1] == cpMove && board[2][2] == cpMove && board[3][3] == cpMove)
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == cpMove && board[2][2] == cpMove && board[3][1] == cpMove)
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+		
+		if(board[1][1] == cpMove && board[2][1] == cpMove && board[3][1] == cpMove)
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][2] == cpMove && board[2][2] == cpMove && board[3][2] == cpMove)
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+		if(board[1][3] == cpMove && board[2][3] == cpMove && board[3][3] == cpMove)
+		{
+			System.out.println("computer wins");
+			won = true;
+			//System.exit(0);
+		}
+	}
+	
+	public boolean isBoardFull()
+	{
+		for(int i = 1; i < 4; i++)
+		{
+			for(int j = 1; j < 4; j++)
+			{
+				if(board[i][j] == '-')
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public void menu()
+	{
+		System.out.println("**********************");
+		
+		System.out.println("     "+"Tic Tac Toe");
+		
+		System.out.println("**********************");
+		
+		System.out.println("For one player mode enter: 1");
+		
+		System.out.println("For two player mode enter: 2");
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		 
+		 TicTacToe game = new  TicTacToe();
+		 char answer;
+		do{
+		 game.menu();
+		 
+		 In read = new In();
+			
+		int mode = read.readInt();
+		 
+		 if(mode == 2){
+		 
+		 game.PrintTheBoard();
+		 
+		 game.clearBoard();
+		 
+		 System.out.println("player one move");
+	
+		 while(won != true)
+		 {
+			 level ++;
+			 game.placeMarkTwoPlayer();
+			 
+			 game.PrintTheBoard();
+			 
+			 game.chekIfWon();
+			 
+			 if(game.isBoardFull() && won != true)
+			 {
+				 System.out.println("it's a tie!");
+				 break;
+				// System.exit(0);
+			 }
+			 
+			 game.twoPlayerTurn();
+			 
+		}
+		 
+	}
+		 
+		 if(mode == 1)
+		 {
+			 game.PrintTheBoard();
+			 
+			 game.clearBoard();
+			 
+			 System.out.println("player one move");
+		
+			 while(won != true)
+			 {
+				 level ++;
+				 game.placeMarkOnePlayer();
+				 
+				 game.PrintTheBoard();
+				 
+				 game.checkIfComputerWon();
+				 
+				 if(game.isBoardFull() && won != true)
+				 {
+					 System.out.println("it's a tie!");
+					 break;
+					 //System.exit(0);
+				 }
+				 
+				 game.onePlayerTurn();
+				 
+			}
+		 }
+		 
+		 System.out.println("Menu: M, Exit: E");
+		 In read1 = new In();
+		   answer = read1.readChar();
+		
+	 } while(answer != E);
+	
+}
+	
+}
+	
