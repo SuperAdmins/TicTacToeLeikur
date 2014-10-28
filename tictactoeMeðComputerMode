@@ -470,8 +470,7 @@ In read = new In();
 		
 		 
 		 TicTacToe game = new  TicTacToe();
-		 char answer;
-		do{
+	
 		 game.menu();
 		 
 		 In read = new In();
@@ -537,14 +536,7 @@ In read = new In();
 			}
 		 }
 		 
-		 System.out.println("Menu: M, Exit: E");
-		 In read1 = new In();
-		   answer = read1.readChar();
-		
-	 } while(answer != 'E');
-	
 }
 	
 }
-	
 	
