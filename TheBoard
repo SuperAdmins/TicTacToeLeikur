@@ -1,0 +1,60 @@
+package ticTacToe;
+
+public class TheBoard {
+	
+	public static char board[][];
+	
+	public TheBoard()
+	{
+		board = new char[4][4];
+		clearBoard();
+	}
+	
+	public void clearBoard()
+	{
+		for(int i = 1; i < 4; i++)
+		{
+			for(int j = 1; j < 4; j++)
+			{
+				board[i][j] = '-';
+			}
+		}
+	}
+	
+	public void PrintTheBoard()
+	{
+		
+		System.out.println("        "+"_______");
+		
+		for(int i = 1; i < 4; i ++)
+		{
+			System.out.print("        "+"|");
+			
+			for(int j = 1; j < 4; j++)
+			{
+				System.out.print(board[i][j] + "|");
+				
+			}
+			System.out.println();
+		}
+		
+		System.out.println("        "+"_______");
+	}
+	
+
+	public boolean isBoardFull()
+	{
+		for(int i = 1; i < 4; i++)
+		{
+			for(int j = 1; j < 4; j++)
+			{
+				if(board[i][j] == '-')
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+}
